@@ -1,0 +1,12 @@
+{
+    "name": "node_backend",
+    "version": "1.0.0",
+    "description": "Node.js Backend",
+    "main": "src/server.js",
+    "scripts": {
+        "start": "nodemon src/server.js"
+    },
+    "dependencies": {
+        "express": "^4.16.1"
+    }
+}

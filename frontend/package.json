@@ -1,0 +1,13 @@
+{
+    "name": "node_frontend",
+    "version": "1.0.0",
+    "description": "Node.js Frontend",
+    "main": "src/app.js",
+    "scripts": {
+        "start": "nodemon src/app.js"
+    },
+    "dependencies": {
+        "express": "^4.16.1",
+        "axios": "0.19.0"
+    }
+}

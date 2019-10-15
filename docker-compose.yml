@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+
+  traefik:
+    image: traefik:v2.0
+    command: --api.insecure=true --providers.docker
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+        - ./backend:/app
+        - /app/node_modules
+    ports:
+      - 3001:3001
+    labels:
+      - "traefik.frontend.rule: PathPrefixStrip:/backend"
+      - "traefik.http.routers.backend.rule=Host(`backend.localhost`)"
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+        - ./frontend:/app
+        - /app/node_modules
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
+      - API_URL=http://backend:3001
+    depends_on:
+      - backend
+    labels:
+      - "traefik.http.routers.frontend.rule=Host(`web.localhost`)"
