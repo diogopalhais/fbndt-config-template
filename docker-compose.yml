@@ -22,7 +22,7 @@ services:
       - 3001:3001
     labels:
       - "traefik.frontend.rule: PathPrefixStrip:/backend"
-      - "traefik.http.routers.backend.rule=Host(`backend.localhost`)"
+      - "traefik.http.routers.backend.rule=Host(`api.startnative.com`)"
 
   frontend:
     build: 
@@ -39,4 +39,4 @@ services:
     depends_on:
       - backend
     labels:
-      - "traefik.http.routers.frontend.rule=Host(`web.localhost`)"
+      - "traefik.http.routers.frontend.rule=Host(`web.startnative.com`)"
